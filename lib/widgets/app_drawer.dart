@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/screens/bottom_sheet_test_screen.dart';
+import '../helpers/custom_route.dart';
 import '../screens/user_products_screen.dart';
 import '../screens/orders_screen.dart';
 import '../providers/auth.dart';
@@ -30,8 +32,13 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.payment),
             title: const Text('Orders'),
             onTap: () {
-              Navigator.of(context)
-                  .pushReplacementNamed(OrdersScreen.routeName);
+              // Navigator.of(context)
+              //     .pushReplacementNamed(OrdersScreen.routeName);
+              Navigator.of(context).pushReplacement(
+                CustomRoute(
+                  builder: (ctx) => OrdersScreen(),
+                ),
+              );
             },
           ),
           const Divider(),
@@ -53,6 +60,18 @@ class AppDrawer extends StatelessWidget {
               // Navigator.of(context)
               //     .pushReplacementNamed(UserProductsScreen.routeName);
               Provider.of<Auth>(context, listen: false).logout();
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.open_in_new),
+            title: const Text('test'),
+            onTap: () {
+              Navigator.of(context).pop();
+
+              // Navigator.of(context)
+              //     .pushReplacementNamed(UserProductsScreen.routeName);
+              Navigator.of(context).pushNamed(BottomSheetTestScreen.routeName);
             },
           ),
         ],

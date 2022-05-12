@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/screens/bottom_sheet_test_screen.dart';
 import 'package:shop_app/screens/products_overview_screen.dart';
 import './screens/splash_screen.dart';
 import './screens/cart_screen.dart';
@@ -12,6 +13,7 @@ import './screens/user_products_screen.dart';
 import './screens/edit_product_screen.dart';
 import './screens/auth_screen.dart';
 import './providers/auth.dart';
+import './helpers/custom_route.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,6 +57,12 @@ class MyApp extends StatelessWidget {
                   secondary: Colors.deepOrange,
                 ),
             fontFamily: 'Lato',
+            pageTransitionsTheme: PageTransitionsTheme(
+              builders: {
+                TargetPlatform.android: CustomPageTransitionBuilder(),
+                TargetPlatform.iOS: CustomPageTransitionBuilder(),
+              },
+            ),
           ),
           home: auth.isAuth
               ? ProductsOverviewScreen()
@@ -72,6 +80,8 @@ class MyApp extends StatelessWidget {
             OrdersScreen.routeName: (ctx) => OrdersScreen(),
             UserProductsScreen.routeName: (ctx) => UserProductsScreen(),
             EditProductScreen.routeName: (ctx) => const EditProductScreen(),
+            BottomSheetTestScreen.routeName: (ctx) =>
+                const BottomSheetTestScreen(),
           },
         ),
       ),
